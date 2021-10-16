@@ -8,6 +8,16 @@ async function get(url) {
     }
 }
 
-const httpClient = { get };
+async function remove(url) {
+    try {
+        const data = await fetch(url, { method: 'DELETE' }).then((response) => response.json());
+        return data;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message);
+    }
+}
+
+const httpClient = { get, remove };
 
 export default httpClient;

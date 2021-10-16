@@ -26,7 +26,13 @@ function ActivityList() {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {activities.map((act) => (
-                        <ActivityCard key={act.id} title={act.title} dateCreated={act.created_at} />
+                        <ActivityCard
+                            key={act.id}
+                            id={act.id}
+                            title={act.title}
+                            dateCreated={act.created_at}
+                            refreshCallback={loadActivities}
+                        />
                     ))}
                 </div>
             )}
