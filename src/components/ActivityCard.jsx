@@ -31,7 +31,7 @@ function ActivityCard({ id, title, dateCreated, refreshCallback }) {
     return (
         <>
             <div className="flex flex-col justify-between p-6 rounded-lg shadow-md bg-white h-44">
-                <h3 className="text-2xl font-bold">{title}</h3>
+                <h3 className="text-2xl font-bold line-clamp-2">{title}</h3>
                 <div className="flex justify-between items-center">
                     <span className="text-md text-gray-500">{parseISODateString(dateCreated)}</span>
                     <IconButton onClick={showDeleteDialog} icon={<TrashIcon />} size="small" />

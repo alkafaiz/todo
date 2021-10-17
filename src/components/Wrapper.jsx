@@ -3,7 +3,7 @@ import Container from './Container';
 
 function Wrapper({ children }) {
     return (
-        <div className="bg-gray-50">
+        <div>
             <Container>{children}</Container>
         </div>
     );
