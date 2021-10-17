@@ -9,7 +9,7 @@ const routes = [
         exact: true,
     },
     {
-        path: '/item',
+        path: '/item/:id',
         name: 'todo-item',
         component: Item,
         exact: true,

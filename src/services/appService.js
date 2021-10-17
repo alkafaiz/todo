@@ -28,3 +28,12 @@ export async function createActivity(name) {
         throw new Error(error.message);
     }
 }
+
+export async function getTodo(id) {
+    try {
+        const data = await httpClient.get(`${END_POINTS.activity.href}/${id}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
