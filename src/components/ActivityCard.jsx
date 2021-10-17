@@ -7,6 +7,7 @@ import DeleteDialog from './DeleteDialog';
 import { deleteActivity } from '../services/appService';
 import useModal from '../helper/useModal';
 import { useRefreshActivity } from '../helper/ActivityContext';
+import toast from 'react-hot-toast';
 
 function ActivityCard({ id, title, dateCreated }) {
     const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
@@ -18,6 +19,7 @@ function ActivityCard({ id, title, dateCreated }) {
             setIsDeleting(true);
             await deleteActivity(id);
             refreshActivity();
+            toast.success('Activity berhasil dihapus');
         } catch (error) {
             console.log(error);
         }

@@ -6,6 +6,7 @@ import AddIcon from './AddIcon';
 import Button from './Button';
 import Modal from './Modal';
 import NewActivityDialog from './NewActivityDialog';
+import toast from 'react-hot-toast';
 
 function AddActivity() {
     const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
@@ -16,6 +17,7 @@ function AddActivity() {
         await createActivity(data.name);
         refreshActivity();
         handleCloseModal();
+        toast.success('Activity berhasil ditambahkan');
     };
 
     return (
