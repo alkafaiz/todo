@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRefreshActivity } from '../helper/ActivityContext';
 import useModal from '../helper/useModal';
 import { createActivity } from '../services/appService';
 import AddIcon from './AddIcon';
@@ -8,10 +9,13 @@ import NewActivityDialog from './NewActivityDialog';
 
 function AddActivity() {
     const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
+    const refreshActivity = useRefreshActivity();
 
     const onSubmit = async (data) => {
         console.log(data);
         await createActivity(data.name);
+        refreshActivity();
+        handleCloseModal();
     };
 
     return (

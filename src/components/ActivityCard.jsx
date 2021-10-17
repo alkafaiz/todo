@@ -6,16 +6,18 @@ import Modal from './Modal';
 import DeleteDialog from './DeleteDialog';
 import { deleteActivity } from '../services/appService';
 import useModal from '../helper/useModal';
+import { useRefreshActivity } from '../helper/ActivityContext';
 
-function ActivityCard({ id, title, dateCreated, refreshCallback }) {
+function ActivityCard({ id, title, dateCreated }) {
     const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
     const [isDeleting, setIsDeleting] = useState(false);
+    const refreshActivity = useRefreshActivity();
 
     const handleDelete = async () => {
         try {
             setIsDeleting(true);
             await deleteActivity(id);
-            refreshCallback();
+            refreshActivity();
         } catch (error) {
             console.log(error);
         }

@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { getActivities } from '../services/appService';
+import React, { useEffect } from 'react';
+import { useActivity, useRefreshActivity } from '../helper/ActivityContext';
 import ActivityCard from './ActivityCard';
 
 function ActivityList() {
-    const [activities, setActivities] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const { activities, isLoading } = useActivity();
+    const refreshActivity = useRefreshActivity();
 
     useEffect(() => {
-        loadActivities();
-    }, []);
-
-    async function loadActivities() {
-        const activities = await getActivities();
+        refreshActivity();
         console.log(activities);
-        setActivities(activities.data);
-        setIsLoading(false);
-    }
+    }, []);
 
     return (
         <>
@@ -26,13 +20,7 @@ function ActivityList() {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {activities.map((act) => (
-                        <ActivityCard
-                            key={act.id}
-                            id={act.id}
-                            title={act.title}
-                            dateCreated={act.created_at}
-                            refreshCallback={loadActivities}
-                        />
+                        <ActivityCard key={act.id} id={act.id} title={act.title} dateCreated={act.created_at} />
                     ))}
                 </div>
             )}
