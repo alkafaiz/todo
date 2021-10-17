@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Button({ children, onClick, startIcon, variant = 'primary', size = 'large' }) {
+function Button({ children, onClick, startIcon, variant = 'primary', size = 'large', type = 'button' }) {
     const getVariantClassName = () => {
         switch (variant) {
             case 'primary':
@@ -57,6 +57,7 @@ function Button({ children, onClick, startIcon, variant = 'primary', size = 'lar
     };
     return (
         <button
+            type={type}
             onClick={onClick}
             className={`flex items-center ${getSizeClassName()} transition rounded-full focus:outline-none focus:ring-2 focus:ring-opacity-50 ${getVariantClassName()}`}
         >

@@ -18,3 +18,13 @@ export async function deleteActivity(id) {
         throw new Error(error.message);
     }
 }
+
+export async function createActivity(name) {
+    try {
+        const payload = { title: name };
+        const data = await httpClient.post(END_POINTS.activity.href, payload);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}

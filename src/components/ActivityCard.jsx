@@ -5,18 +5,11 @@ import TrashIcon from './TrashIcon';
 import Modal from './Modal';
 import DeleteDialog from './DeleteDialog';
 import { deleteActivity } from '../services/appService';
+import useModal from '../helper/useModal';
 
 function ActivityCard({ id, title, dateCreated, refreshCallback }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
     const [isDeleting, setIsDeleting] = useState(false);
-
-    const showDeleteDialog = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
 
     const handleDelete = async () => {
         try {
@@ -34,11 +27,16 @@ function ActivityCard({ id, title, dateCreated, refreshCallback }) {
                 <h3 className="text-2xl font-bold line-clamp-2">{title}</h3>
                 <div className="flex justify-between items-center">
                     <span className="text-md text-gray-500">{parseISODateString(dateCreated)}</span>
-                    <IconButton onClick={showDeleteDialog} icon={<TrashIcon />} size="small" />
+                    <IconButton onClick={handleOpenModal} icon={<TrashIcon />} size="small" />
                 </div>
             </div>
             <Modal isOpen={isModalOpen} shouldCloseOnOverlayClick={false}>
-                <DeleteDialog onCancel={handleCloseModal} onConfirm={handleDelete} isLoading={isDeleting} />
+                <DeleteDialog
+                    onCancel={handleCloseModal}
+                    onConfirm={handleDelete}
+                    isLoading={isDeleting}
+                    title={title}
+                />
             </Modal>
         </>
     );

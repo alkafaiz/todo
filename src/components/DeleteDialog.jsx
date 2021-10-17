@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-function DeleteDialog({ onCancel, onConfirm, isLoading }) {
+function DeleteDialog({ onCancel, onConfirm, isLoading, title }) {
     return (
         <div className="p-6 flex flex-col items-center justify-between h-60">
             <svg style={{ width: '50px', height: '50px' }} viewBox="0 0 24 24">
@@ -10,7 +10,7 @@ function DeleteDialog({ onCancel, onConfirm, isLoading }) {
             <p className="text-xl text-center font-semibold">
                 Apakah anda yakin menghapus activity
                 <br />
-                <span className="font-bold">"Title"?</span>
+                <span className="font-bold">"{title}"?</span>
             </p>
             {isLoading ? (
                 <span className="text-lg text-gray-600">Menghapus...</span>
