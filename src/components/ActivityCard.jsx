@@ -21,6 +21,7 @@ function ActivityCard({ id, title, dateCreated }) {
             refreshActivity();
             toast.success('Activity berhasil dihapus');
         } catch (error) {
+            toast.error('Activity gagal dihapus');
             console.log(error);
         }
     };

@@ -13,11 +13,15 @@ function AddActivity() {
     const refreshActivity = useRefreshActivity();
 
     const onSubmit = async (data) => {
-        console.log(data);
-        await createActivity(data.name);
-        refreshActivity();
-        handleCloseModal();
-        toast.success('Activity berhasil ditambahkan');
+        try {
+            await createActivity(data.name);
+            refreshActivity();
+            handleCloseModal();
+            toast.success('Activity berhasil ditambahkan');
+        } catch (error) {
+            console.log(error);
+            toast.error('Activity gagal ditambahkan');
+        }
     };
 
     return (
