@@ -5,7 +5,7 @@ import AddIcon from './AddIcon';
 import Button from './Button';
 import Modal from './Modal';
 import toast from 'react-hot-toast';
-import NewTodoItemDialog from './NewTodoItemDialog';
+import TodoItemDialog from './TodoItemDialog';
 import { useParams } from 'react-router-dom';
 import { useRefreshTodo } from '../helper/TodoContext';
 
@@ -32,7 +32,7 @@ function AddTodoItem() {
                 Tambah
             </Button>
             <Modal isOpen={isModalOpen} shouldCloseOnOverlayClick={false}>
-                <NewTodoItemDialog onCancel={handleCloseModal} onConfirm={onSubmit} />
+                <TodoItemDialog onCancel={handleCloseModal} onConfirm={onSubmit} title="Tambah List Item" />
             </Modal>
         </div>
     );

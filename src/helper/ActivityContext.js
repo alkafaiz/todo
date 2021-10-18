@@ -19,7 +19,6 @@ export function ActivityProvider({ children }) {
 
     async function loadActivities() {
         const activities = await getActivities();
-        console.log(activities);
         setActivities({ activities: activities.data, isLoading: false });
     }
 

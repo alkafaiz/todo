@@ -8,7 +8,7 @@ function ActivityList() {
 
     useEffect(() => {
         refreshActivity();
-        console.log(activities);
+        // eslint-disable-next-line
     }, []);
 
     return (

@@ -14,18 +14,13 @@ function ItemTitle({ title }) {
     const [itemName, setItemName] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
 
     const onEdit = () => setIsEditing(true);
-    const onCloseEdit = () => setIsEditing(false);
 
     useEffect(() => {
         setValue('name', title);
+        // eslint-disable-next-line
     }, []);
 
     const handleReturn = () => {

@@ -15,6 +15,7 @@ function useClickOutside(handler) {
         return () => {
             document.removeEventListener('mousedown', preHandler);
         };
+        // eslint-disable-next-line
     }, []);
 
     return domNode;

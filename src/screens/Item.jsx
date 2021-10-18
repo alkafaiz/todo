@@ -11,19 +11,14 @@ function Item() {
     const refreshTodo = useRefreshTodo();
 
     useEffect(() => {
-        initializeTodo();
+        initializeTodo(); // eslint-disable-next-line
     }, []);
 
     function initializeTodo() {
-        console.log(params);
         if (params.id) {
             refreshTodo(params.id);
         }
     }
-
-    useEffect(() => {
-        console.log(details);
-    }, [details]);
 
     if (isLoading) return 'Loading...';
 

@@ -65,3 +65,12 @@ export async function updateActivity(activityId, payload) {
         throw new Error(error.message);
     }
 }
+
+export async function deleteTodoItem(id) {
+    try {
+        const data = await httpClient.remove(`${END_POINTS.todoItem.href}/${id}`);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}

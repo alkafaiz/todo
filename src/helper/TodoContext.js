@@ -21,7 +21,6 @@ export function TodoProvider({ children }) {
     async function loadTodo(id) {
         try {
             const todo = await getTodo(id);
-            console.log(todo);
             setTodo({
                 details: {
                     id: todo.id,
