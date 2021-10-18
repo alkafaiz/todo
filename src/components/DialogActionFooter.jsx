@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-function DialogActionFooter({ confirmLabel = 'Simpan', onCancel, onConfirm }) {
+function DialogActionFooter({ confirmLabel = 'Simpan', onCancel, onConfirm, disableConfirm = false }) {
     return (
         <div className="px-6 py-2 border-t flex justify-end">
             {!!onCancel && (
@@ -12,7 +12,13 @@ function DialogActionFooter({ confirmLabel = 'Simpan', onCancel, onConfirm }) {
                     &emsp;
                 </>
             )}
-            <Button data-cy="modal-add-save-button" type="submit" onClick={onConfirm} size="medium">
+            <Button
+                disabled={disableConfirm}
+                data-cy="modal-add-save-button"
+                type="submit"
+                onClick={onConfirm}
+                size="medium"
+            >
                 {confirmLabel}
             </Button>
         </div>

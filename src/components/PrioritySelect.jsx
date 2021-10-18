@@ -56,8 +56,8 @@ function PrioritySelect({ value, ...props }) {
             {transitions.map(
                 ({ item, key, props }) =>
                     item && (
-                        <animated.div style={props} key={key} className="absolute mt-2 w-full ">
-                            <div className=" bg-white block border rounded-md border-gray-300 shadow-sm">
+                        <animated.div style={props} key={key} className="absolute mt-2 w-full z-10 ">
+                            <div className="bg-white block border rounded-md border-gray-300 shadow-sm">
                                 {PRIORITIES.map((prio, index) => {
                                     const isSelected = prio.value === value;
                                     return (

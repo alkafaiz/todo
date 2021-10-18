@@ -70,21 +70,25 @@ function SortTodoItems() {
                                 {ORDERS.map((order, index) => {
                                     const isSelected = order.value === value;
                                     return (
-                                        <div
-                                            data-cy="sort-selection"
-                                            onClick={() => onSelect(order.value)}
-                                            key={order.label}
-                                            className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
-                                                index !== 0 ? 'border-t' : ''
-                                            }`}
-                                        >
-                                            <div className={`mr-2`}>{getSortIcon(order.value)}</div>
-                                            <span>{order.label}</span>
-                                            {isSelected && (
-                                                <div className="ml-auto">
-                                                    <CheckIcon />
+                                        <div data-cy="sort-selection">
+                                            <div
+                                                {...(isSelected && { 'data-cy': 'sort-selection-selected' })}
+                                                onClick={() => onSelect(order.value)}
+                                                key={order.label}
+                                                className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
+                                                    index !== 0 ? 'border-t' : ''
+                                                }`}
+                                            >
+                                                <div data-cy="sort-selection-icon" className={`mr-2`}>
+                                                    {getSortIcon(order.value)}
                                                 </div>
-                                            )}
+                                                <span data-cy="sort-selection-title">{order.label}</span>
+                                                {isSelected && (
+                                                    <div className="ml-auto">
+                                                        <CheckIcon />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     );
                                 })}

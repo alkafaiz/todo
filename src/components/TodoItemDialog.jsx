@@ -10,8 +10,10 @@ function TodoItemDialog({ onCancel, onConfirm, title, initialValue }) {
         handleSubmit,
         setValue,
         getValues,
-        formState: { errors },
-    } = useForm();
+        formState: { errors, isValid },
+    } = useForm({
+        mode: 'onChange',
+    });
 
     useEffect(() => {
         if (initialValue) {
@@ -20,6 +22,10 @@ function TodoItemDialog({ onCancel, onConfirm, title, initialValue }) {
         }
         // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        console.log('isValid ', isValid);
+    }, [isValid]);
 
     return (
         <div data-cy="modal-add">
@@ -52,7 +58,7 @@ function TodoItemDialog({ onCancel, onConfirm, title, initialValue }) {
                         {errors.priority && <p className="text-red-500 text-sm">Priority is required.</p>}
                     </label>
                 </div>
-                <DialogActionFooter />
+                <DialogActionFooter disableConfirm={!isValid} />
             </form>
         </div>
     );

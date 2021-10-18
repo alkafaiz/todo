@@ -4,7 +4,7 @@ function Button({ children, onClick, startIcon, variant = 'primary', size = 'lar
     const getVariantClassName = () => {
         switch (variant) {
             case 'primary':
-                return 'bg-blue-500 hover:bg-blue-700 focus:ring-blue-600';
+                return 'bg-blue-500 hover:bg-blue-700 focus:ring-blue-600 disabled:opacity-50';
 
             case 'default':
                 return 'bg-gray-100 hover:bg-gray-200 focus:ring-gray-600';
