@@ -13,14 +13,10 @@ function NewTodoItemDialog({ onCancel, onConfirm }) {
         formState: { errors },
     } = useForm();
 
-    function onConfirm1(data) {
-        console.log(data);
-    }
-
     return (
         <div>
             <DialogHeader title="Tambah List Item" onClose={onCancel} />
-            <form onSubmit={handleSubmit(onConfirm1)}>
+            <form onSubmit={handleSubmit(onConfirm)}>
                 <div className="p-6">
                     <label className="block mb-3">
                         <span className="text-gray-700">Nama List Item</span>

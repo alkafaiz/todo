@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useClickOutside from '../helper/useClickOutside';
 import { useTransition, animated } from 'react-spring';
 import { easeQuadIn, easeQuadOut } from 'd3-ease';
-import ChevronLeftIcon from './ChevronLeftIcon';
 
 function ChevronIconDown() {
     return (

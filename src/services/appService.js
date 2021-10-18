@@ -37,3 +37,13 @@ export async function getTodo(id) {
         throw new Error(error.message);
     }
 }
+
+export async function createTodoItem(activityId, name, priority) {
+    try {
+        const payload = { title: name, activity_group_i: activityId, priority };
+        const data = await httpClient.post(END_POINTS.todoItem.href, payload);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
