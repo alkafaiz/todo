@@ -56,3 +56,12 @@ export async function updateTodoItem(itemId, payload) {
         throw new Error(error.message);
     }
 }
+
+export async function updateActivity(activityId, payload) {
+    try {
+        const data = await httpClient.patch(`${END_POINTS.activity.href}/${activityId}`, payload);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}

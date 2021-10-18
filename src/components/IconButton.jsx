@@ -1,8 +1,9 @@
 import React from 'react';
 
-function IconButton({ icon, onClick = () => {}, size = 'large' }) {
+function IconButton({ icon, onClick = () => {}, size = 'large', type = 'button' }) {
     return (
         <button
+            type={type}
             onClick={onClick}
             className={`${
                 size === 'small' ? 'p-1' : 'p-3'
