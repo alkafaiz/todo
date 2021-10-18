@@ -49,6 +49,7 @@ function PrioritySelect({ value, ...props }) {
     return (
         <div ref={menuRef} className="relative">
             <button
+                data-cy="modal-add-priority-dropdown"
                 type="button"
                 onClick={toggleOpen}
                 className="hover:bg-gray-100 flex w-full items-center my-1 px-3 py-2 border rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -68,6 +69,7 @@ function PrioritySelect({ value, ...props }) {
                                     const isSelected = prio.value === value;
                                     return (
                                         <div
+                                            data-cy="modal-add-priority-item"
                                             onClick={() => onSelect(prio.value)}
                                             key={prio.label}
                                             className={`flex items-center px-3 py-2 hover:bg-gray-100 ${

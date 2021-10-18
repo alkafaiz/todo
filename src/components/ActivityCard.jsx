@@ -34,16 +34,30 @@ function ActivityCard({ id, title, dateCreated }) {
 
     return (
         <>
-            <div className="flex flex-col justify-between p-6 rounded-lg shadow-md bg-white h-44">
-                <h3 onClick={handleNavigate} className="cursor-pointer text-2xl font-bold line-clamp-2">
+            <div
+                data-cy="activity-item"
+                className="flex flex-col justify-between p-6 rounded-lg shadow-md bg-white h-44"
+            >
+                <h3
+                    data-cy="activity-item-title"
+                    onClick={handleNavigate}
+                    className="cursor-pointer text-2xl font-bold line-clamp-2"
+                >
                     {title}
                 </h3>
                 <div className="flex justify-between items-center">
-                    <span className="text-md text-gray-500">{parseISODateString(dateCreated)}</span>
-                    <IconButton onClick={handleOpenModal} icon={<TrashIcon />} size="small" />
+                    <span data-cy="activity-item-date" className="text-md text-gray-500">
+                        {parseISODateString(dateCreated)}
+                    </span>
+                    <IconButton
+                        data-cy="activity-item-delete-button"
+                        onClick={handleOpenModal}
+                        icon={<TrashIcon />}
+                        size="small"
+                    />
                 </div>
             </div>
-            <Modal isOpen={isModalOpen} shouldCloseOnOverlayClick={false}>
+            <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
                 <DeleteDialog
                     onCancel={handleCloseModal}
                     onConfirm={handleDelete}

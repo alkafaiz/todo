@@ -26,7 +26,7 @@ function AddActivity() {
 
     return (
         <div>
-            <Button onClick={handleOpenModal} startIcon={<AddIcon />}>
+            <Button data-cy="activity-add-button" onClick={handleOpenModal} startIcon={<AddIcon />}>
                 Tambah
             </Button>
             <Modal isOpen={isModalOpen} shouldCloseOnOverlayClick={false}>

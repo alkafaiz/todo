@@ -6,6 +6,7 @@ function TodoList() {
     const { details } = useTodo();
     return (
         <div className="grid grid-cols-1 gap-4">
+            {!details.items.length && <span data-cy="todo-empty-state">Tidak ada list item</span>}
             {details.items.map((todo) => (
                 <TodoCard
                     key={todo.id}

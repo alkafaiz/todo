@@ -16,7 +16,7 @@ function ActivityList() {
             {isLoading ? (
                 'Loading...'
             ) : !activities.length ? (
-                'Tidak ada activity. Tambah baru!'
+                <div data-cy="activity-empty-state">Tidak ada activity. Tambah baru!</div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {activities.map((act) => (

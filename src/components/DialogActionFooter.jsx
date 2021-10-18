@@ -12,7 +12,7 @@ function DialogActionFooter({ confirmLabel = 'Simpan', onCancel, onConfirm }) {
                     &emsp;
                 </>
             )}
-            <Button type="submit" onClick={onConfirm} size="medium">
+            <Button data-cy="modal-add-save-button" type="submit" onClick={onConfirm} size="medium">
                 {confirmLabel}
             </Button>
         </div>

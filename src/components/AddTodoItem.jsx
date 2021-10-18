@@ -28,7 +28,7 @@ function AddTodoItem() {
 
     return (
         <div>
-            <Button onClick={handleOpenModal} startIcon={<AddIcon />}>
+            <Button data-cy="todo-add-button" onClick={handleOpenModal} startIcon={<AddIcon />}>
                 Tambah
             </Button>
             <Modal isOpen={isModalOpen} shouldCloseOnOverlayClick={false}>

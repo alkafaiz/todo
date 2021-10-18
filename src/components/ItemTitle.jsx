@@ -44,7 +44,7 @@ function ItemTitle({ title }) {
 
     return (
         <div className="flex items-center">
-            <IconButton onClick={handleReturn} icon={<ChevronLeftIcon />} size="small" />
+            <IconButton data-cy="todo-back-button" onClick={handleReturn} icon={<ChevronLeftIcon />} size="small" />
             {isEditing ? (
                 <form onSubmit={handleSubmit(onSubmit)} className="flex items-center">
                     <input
@@ -60,9 +60,11 @@ function ItemTitle({ title }) {
                 </form>
             ) : (
                 <>
-                    <h2 className="ml-3 text-3xl font-bold">{itemName}</h2>
+                    <h2 data-cy="todo-title" onClick={onEdit} className="ml-3 text-3xl font-bold">
+                        {itemName}
+                    </h2>
                     <div className="ml-2">
-                        <IconButton onClick={onEdit} icon={<PencilIcon />} />
+                        <IconButton data-cy="todo-title-edit-button" onClick={onEdit} icon={<PencilIcon />} />
                     </div>
                 </>
             )}

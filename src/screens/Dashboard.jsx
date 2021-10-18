@@ -8,7 +8,9 @@ function Dashboard() {
         <ActivityProvider>
             <div className="py-8">
                 <div className="mb-5 flex justify-between items-center">
-                    <h2 className="text-3xl font-bold">Activity</h2>
+                    <h2 data-cy="activity-title" className="text-3xl font-bold">
+                        Activity
+                    </h2>
                     <AddActivity />
                 </div>
                 <ActivityList />
