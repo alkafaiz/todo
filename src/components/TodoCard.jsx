@@ -8,7 +8,7 @@ import PencilIcon from './PencilIcon';
 import useModal from '../helper/useModal';
 import Modal from './Modal';
 import TodoItemDialog from './TodoItemDialog';
-import { useRefreshTodo } from '../helper/TodoContext';
+import { useRefreshTodo, useUpdateItemState } from '../helper/TodoContext';
 import { useParams } from 'react-router-dom';
 import DeleteDialog from './DeleteDialog';
 
@@ -25,6 +25,7 @@ function TodoCard({ id, title, priority, isActive }) {
         handleOpenModal: handleOpenDeleteModal,
     } = useModal();
     const refreshTodo = useRefreshTodo();
+    const updateTodoStatus = useUpdateItemState();
     const params = useParams();
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -33,6 +34,7 @@ function TodoCard({ id, title, priority, isActive }) {
         try {
             setIsChecked(value);
             await updateTodoItem(id, { is_active: parseBinaryFromBoolean(!value) });
+            updateTodoStatus(id, !value);
             toast.success('Todo item berhasil di update');
         } catch (error) {
             toast.error('Todo item gagal di update');

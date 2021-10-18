@@ -5,6 +5,7 @@ import { parseBooleanFromBinary, sortItem } from './utilities';
 const TodoContext = React.createContext();
 const RefreshTodoContext = React.createContext();
 const SortItemContext = React.createContext();
+const UpdateItemStateContext = React.createContext();
 
 export function useTodo() {
     return useContext(TodoContext);
@@ -16,6 +17,10 @@ export function useRefreshTodo() {
 
 export function useSortTodo() {
     return useContext(SortItemContext);
+}
+
+export function useUpdateItemState() {
+    return useContext(UpdateItemStateContext);
 }
 
 const initialValue = { details: { id: '', title: '', items: [] }, isLoading: true };
@@ -51,10 +56,22 @@ export function TodoProvider({ children }) {
         replaceItems(items);
     }
 
+    function updateItemState(id, isActive) {
+        let newTodo = [...todo.details.items];
+        const selectedItemIndex = newTodo.findIndex((item) => item.id === id);
+        const item = { ...newTodo[selectedItemIndex], is_active: isActive };
+        newTodo.splice(selectedItemIndex, 1, item);
+        replaceItems(newTodo);
+    }
+
     return (
         <TodoContext.Provider value={todo}>
             <RefreshTodoContext.Provider value={loadTodo}>
-                <SortItemContext.Provider value={sort}> {children}</SortItemContext.Provider>
+                <SortItemContext.Provider value={sort}>
+                    <UpdateItemStateContext.Provider value={updateItemState}>
+                        {children}
+                    </UpdateItemStateContext.Provider>
+                </SortItemContext.Provider>
             </RefreshTodoContext.Provider>
         </TodoContext.Provider>
     );
