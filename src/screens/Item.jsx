@@ -39,6 +39,7 @@ function WrappedItem() {
     return (
         <TodoProvider>
             <Item />
+            <div data-cy="modal-add"></div>
         </TodoProvider>
     );
 }
