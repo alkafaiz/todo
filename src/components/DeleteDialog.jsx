@@ -9,7 +9,7 @@ function DeleteDialog({
     text = 'Apakah anda yakin menghapus activity',
 }) {
     return (
-        <div data-cy="modal-delete" className="p-6 flex flex-col items-center justify-between h-60">
+        <div data-cy="todo-modal-delete" className="p-6 flex flex-col items-center justify-between h-60">
             <svg data-cy="modal-delete-icon" style={{ width: '50px', height: '50px' }} viewBox="0 0 24 24">
                 <path fill="rgba(239, 68, 68)" d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16" />
             </svg>
