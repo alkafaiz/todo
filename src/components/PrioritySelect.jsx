@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import useClickOutside from '../helper/useClickOutside';
 import { useTransition, animated } from 'react-spring';
 import { easeQuadIn, easeQuadOut } from 'd3-ease';
+import { PRIORITIES } from '../helper/constants';
+import { getPriorityColor } from '../helper/utilities';
 
 function ChevronIconDown() {
     return (
@@ -18,14 +20,6 @@ function CheckIcon() {
         </svg>
     );
 }
-
-const priorities = [
-    { label: 'Very High', color: 'bg-red-500' },
-    { label: 'High', color: 'bg-yellow-500' },
-    { label: 'Medium', color: 'bg-green-500' },
-    { label: 'Low', color: 'bg-blue-500' },
-    { label: 'Very Low', color: 'bg-purple-500' },
-];
 
 function PrioritySelect({ value, ...props }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,9 +41,9 @@ function PrioritySelect({ value, ...props }) {
         props.onChange(prio);
     };
 
-    const getPriorityColor = (prio) => {
-        const priority = priorities.find((priority) => priority.label === prio);
-        return priority?.color || '';
+    const getPriorityLabel = (prio) => {
+        const priority = PRIORITIES.find((priority) => priority.value === prio);
+        return priority.label;
     };
 
     return (
@@ -57,10 +51,10 @@ function PrioritySelect({ value, ...props }) {
             <button
                 type="button"
                 onClick={toggleOpen}
-                className="hover:bg-gray-100 flex w-full items-center my-1 px-3 py-2 block border rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="hover:bg-gray-100 flex w-full items-center my-1 px-3 py-2 border rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
                 {!!value && <div className={`${getPriorityColor(value)} rounded-full w-3 h-3 mr-2`}></div>}
-                <span>{value || 'Pilih priority'}</span>
+                <span>{value ? getPriorityLabel(value) : 'Pilih priority'}</span>
                 <div className="ml-auto">
                     <ChevronIconDown />
                 </div>
@@ -70,11 +64,11 @@ function PrioritySelect({ value, ...props }) {
                     item && (
                         <animated.div style={props} key={key} className="absolute mt-2 w-full ">
                             <div className=" bg-white block border rounded-md border-gray-300 shadow-sm">
-                                {priorities.map((prio, index) => {
-                                    const isSelected = prio.label === value;
+                                {PRIORITIES.map((prio, index) => {
+                                    const isSelected = prio.value === value;
                                     return (
                                         <div
-                                            onClick={() => onSelect(prio.label)}
+                                            onClick={() => onSelect(prio.value)}
                                             key={prio.label}
                                             className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
                                                 index !== 0 ? 'border-t' : ''

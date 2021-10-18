@@ -40,8 +40,17 @@ export async function getTodo(id) {
 
 export async function createTodoItem(activityId, name, priority) {
     try {
-        const payload = { title: name, activity_group_i: activityId, priority };
+        const payload = { title: name, activity_group_id: activityId, priority };
         const data = await httpClient.post(END_POINTS.todoItem.href, payload);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export async function updateTodoItem(itemId, payload) {
+    try {
+        const data = await httpClient.patch(`${END_POINTS.todoItem.href}/${itemId}`, payload);
         return data;
     } catch (error) {
         throw new Error(error.message);

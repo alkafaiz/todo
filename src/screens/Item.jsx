@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import AddTodoItem from '../components/AddTodoItem';
 import ChevronLeftIcon from '../components/ChevronLeftIcon';
 import IconButton from '../components/IconButton';
+import TodoList from '../components/TodoList';
 import { TodoProvider, useRefreshTodo, useTodo } from '../helper/TodoContext';
 
 function Item() {
@@ -43,7 +44,7 @@ function Item() {
                 </div>
                 <AddTodoItem />
             </div>
-            {/* <ActivityList /> */}
+            <TodoList />
         </div>
     );
 }

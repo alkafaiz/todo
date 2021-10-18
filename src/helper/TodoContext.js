@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { getTodo } from '../services/appService';
+import { parseBooleanFromBinary } from './utilities';
 
 const TodoContext = React.createContext();
 const RefreshTodoContext = React.createContext();
@@ -18,16 +19,23 @@ export function TodoProvider({ children }) {
     const [todo, setTodo] = useState(initialValue);
 
     async function loadTodo(id) {
-        const todo = await getTodo(id);
-        console.log(todo);
-        setTodo({
-            details: {
-                id: todo.id,
-                title: todo.title,
-                items: todo.todo_items,
-            },
-            isLoading: false,
-        });
+        try {
+            const todo = await getTodo(id);
+            console.log(todo);
+            setTodo({
+                details: {
+                    id: todo.id,
+                    title: todo.title,
+                    items: todo.todo_items.map((item) => ({
+                        ...item,
+                        is_active: parseBooleanFromBinary(item.is_active),
+                    })),
+                },
+                isLoading: false,
+            });
+        } catch (error) {
+            setTodo((prev) => ({ ...prev, isLoading: false }));
+        }
     }
 
     return (
