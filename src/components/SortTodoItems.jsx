@@ -71,10 +71,9 @@ function SortTodoItems() {
                                 {ORDERS.map((order, index) => {
                                     const isSelected = order.value === sortBy;
                                     return (
-                                        <div data-cy="sort-selection">
-                                            <button
+                                        <button data-cy="sort-selection" onClick={() => onSelect(order.value)}>
+                                            <div
                                                 {...(isSelected && { 'data-cy': 'sort-selection-selected' })}
-                                                onClick={() => onSelect(order.value)}
                                                 key={order.label}
                                                 className={`flex items-center px-3 py-2 hover:bg-gray-100 w-56 ${
                                                     index !== 0 ? 'border-t' : ''
@@ -89,8 +88,8 @@ function SortTodoItems() {
                                                         <CheckIcon />
                                                     </div>
                                                 )}
-                                            </button>
-                                        </div>
+                                            </div>
+                                        </button>
                                     );
                                 })}
                             </div>
