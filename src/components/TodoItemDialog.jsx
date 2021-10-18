@@ -19,13 +19,11 @@ function TodoItemDialog({ onCancel, onConfirm, title, initialValue }) {
         if (initialValue) {
             setValue('priority', initialValue?.priority, { shouldValidate: true });
             setValue('name', initialValue?.name);
+        } else {
+            setValue('priority', 'very-high', { shouldValidate: true });
         }
         // eslint-disable-next-line
     }, []);
-
-    useEffect(() => {
-        console.log('isValid ', isValid);
-    }, [isValid]);
 
     return (
         <div data-cy="modal-add">

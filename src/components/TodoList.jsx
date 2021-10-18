@@ -5,7 +5,7 @@ import TodoCard from './TodoCard';
 function TodoList() {
     const { details } = useTodo();
     return (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="flex flex-col">
             {!details.items.length && <span data-cy="todo-empty-state">Tidak ada list item</span>}
             {details.items.map((todo) => (
                 <TodoCard

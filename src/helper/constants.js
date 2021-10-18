@@ -25,7 +25,7 @@ export const CALENDAR_MONTHS = [
 export const PRIORITIES = [
     { label: 'Very High', color: 'bg-red-500', value: 'very-high' },
     { label: 'High', color: 'bg-yellow-500', value: 'high' },
-    { label: 'Medium', color: 'bg-green-500', value: 'medium' },
+    { label: 'Medium', color: 'bg-green-500', value: 'normal' },
     { label: 'Low', color: 'bg-blue-500', value: 'low' },
     { label: 'Very Low', color: 'bg-purple-500', value: 'very-low' },
 ];

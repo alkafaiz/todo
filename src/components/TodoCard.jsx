@@ -68,7 +68,7 @@ function TodoCard({ id, title, priority, isActive }) {
 
     return (
         <>
-            <div data-cy="todo-item" className={`bg-white rounded-2xl shadow-lg py-4 px-6 flex items-center`}>
+            <div data-cy="todo-item" className={`bg-white rounded-2xl shadow-lg py-4 px-6 flex items-center mb-4`}>
                 <input
                     data-cy="todo-item-checkbox"
                     type="checkbox"
