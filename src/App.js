@@ -15,6 +15,8 @@ function App() {
                 </Wrapper>
             </Router>
             <Alert />
+            <div data-cy="modal-delete"></div>
+            <div data-cy="modal-information"></div>
         </div>
     );
 }
