@@ -14,6 +14,7 @@ import SortAlpaDescIcon from './SortAlpaDescIcon';
 
 function SortTodoItems() {
     const [isOpen, setIsOpen] = useState(false);
+    const [sortBy, setSortBy] = useState(SORT_TERBARU);
     const toggleOpen = () => setIsOpen((prev) => !prev);
     const onClose = () => setIsOpen(false);
     let menuRef = useClickOutside(onClose);
@@ -45,12 +46,12 @@ function SortTodoItems() {
         }
     }
 
-    const onSelect = (sortBy) => {
-        sort(sortBy);
+    const onSelect = (value) => {
+        setSortBy(value);
+        sort(value);
         onClose();
     };
 
-    const value = '';
     return (
         <div ref={menuRef} className="mr-4 ">
             <IconButton
@@ -68,14 +69,14 @@ function SortTodoItems() {
                                 className="bg-white block border rounded-md border-gray-300 shadow-sm"
                             >
                                 {ORDERS.map((order, index) => {
-                                    const isSelected = order.value === value;
+                                    const isSelected = order.value === sortBy;
                                     return (
                                         <div data-cy="sort-selection">
-                                            <div
+                                            <button
                                                 {...(isSelected && { 'data-cy': 'sort-selection-selected' })}
                                                 onClick={() => onSelect(order.value)}
                                                 key={order.label}
-                                                className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
+                                                className={`flex items-center px-3 py-2 hover:bg-gray-100 w-56 ${
                                                     index !== 0 ? 'border-t' : ''
                                                 }`}
                                             >
@@ -88,7 +89,7 @@ function SortTodoItems() {
                                                         <CheckIcon />
                                                     </div>
                                                 )}
-                                            </div>
+                                            </button>
                                         </div>
                                     );
                                 })}
