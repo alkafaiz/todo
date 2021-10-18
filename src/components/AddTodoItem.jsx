@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import TodoItemDialog from './TodoItemDialog';
 import { useParams } from 'react-router-dom';
 import { useRefreshTodo } from '../helper/TodoContext';
+import SortTodoItems from './SortTodoItems';
 
 function AddTodoItem() {
     const params = useParams();
@@ -27,7 +28,8 @@ function AddTodoItem() {
     };
 
     return (
-        <div>
+        <div className="flex items-center">
+            <SortTodoItems />
             <Button data-cy="todo-add-button" onClick={handleOpenModal} startIcon={<AddIcon />}>
                 Tambah
             </Button>
