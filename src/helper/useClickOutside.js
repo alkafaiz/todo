@@ -5,7 +5,7 @@ function useClickOutside(handler) {
 
     useEffect(() => {
         let preHandler = (event) => {
-            if (!domNode.current.contains(event.target)) {
+            if (!!domNode.current && !domNode.current.contains(event.target)) {
                 handler();
             }
         };

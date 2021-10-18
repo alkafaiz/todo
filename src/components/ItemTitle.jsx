@@ -7,6 +7,7 @@ import SaveIcon from './SaveIcon';
 import { useForm } from 'react-hook-form';
 import { updateActivity } from '../services/appService';
 import toast from 'react-hot-toast';
+import useClickOutside from '../helper/useClickOutside';
 
 function ItemTitle({ title }) {
     const params = useParams();
@@ -14,7 +15,14 @@ function ItemTitle({ title }) {
     const [itemName, setItemName] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
 
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, getValues } = useForm();
+
+    const onClickOutsideToSave = () => {
+        const data = { name: getValues('name') };
+        onSubmit(data);
+    };
+
+    let inputRef = useClickOutside(onClickOutsideToSave);
 
     const onEdit = () => setIsEditing(true);
 
@@ -47,13 +55,15 @@ function ItemTitle({ title }) {
             <IconButton data-cy="todo-back-button" onClick={handleReturn} icon={<ChevronLeftIcon />} size="small" />
             {isEditing ? (
                 <form onSubmit={handleSubmit(onSubmit)} className="flex items-center">
-                    <input
-                        name="name"
-                        type="text"
-                        className="my-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        placeholder="Tambahkan nama list item"
-                        {...register('name', { required: true })}
-                    />
+                    <div ref={inputRef}>
+                        <input
+                            name="name"
+                            type="text"
+                            className="my-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            placeholder="Tambahkan nama list item"
+                            {...register('name', { required: true })}
+                        />
+                    </div>
                     <div className="ml-2">
                         <IconButton type="submit" icon={<SaveIcon />} />
                     </div>

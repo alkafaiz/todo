@@ -33,7 +33,7 @@ function AddTodoItem() {
             <Button data-cy="todo-add-button" onClick={handleOpenModal} startIcon={<AddIcon />}>
                 Tambah
             </Button>
-            <Modal isOpen={isModalOpen} shouldCloseOnOverlayClick={false}>
+            <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
                 <TodoItemDialog onCancel={handleCloseModal} onConfirm={onSubmit} title="Tambah List Item" />
             </Modal>
         </div>
