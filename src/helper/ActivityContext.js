@@ -18,7 +18,7 @@ export function ActivityProvider({ children }) {
     const [activities, setActivities] = useState(initialValue);
 
     async function loadActivities() {
-        setActivities((prev) => ({ ...prev, isLoading: true }));
+        // setActivities((prev) => ({ ...prev, isLoading: true }));
         const activities = await getActivities();
         setActivities({ activities: activities.data, isLoading: false });
     }

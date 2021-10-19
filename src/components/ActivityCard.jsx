@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { parseISODateString } from '../helper/utilities';
 import IconButton from './IconButton';
 import TrashIcon from './TrashIcon';
@@ -64,4 +64,4 @@ function ActivityCard({ id, title, dateCreated }) {
     );
 }
 
-export default ActivityCard;
+export default memo(ActivityCard);

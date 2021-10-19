@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRefreshActivity } from '../helper/ActivityContext';
 import { createActivity } from '../services/appService';
 import AddIcon from './AddIcon';
@@ -7,25 +7,25 @@ import toast from 'react-hot-toast';
 
 function AddActivity() {
     const refreshActivity = useRefreshActivity();
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async () => {
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
             await createActivity('New Activity');
             refreshActivity();
-            setIsLoading(false);
-            toast.success('Activity berhasil ditambahkan');
+            // setIsLoading(false);
+            // toast.success('Activity berhasil ditambahkan');
         } catch (error) {
             console.log(error);
-            setIsLoading(false);
+            // setIsLoading(false);
             toast.error('Activity gagal ditambahkan');
         }
     };
 
     return (
         <div>
-            <Button disabled={isLoading} data-cy="activity-add-button" onClick={onSubmit} startIcon={<AddIcon />}>
+            <Button data-cy="activity-add-button" onClick={onSubmit} startIcon={<AddIcon />}>
                 Tambah
             </Button>
         </div>
