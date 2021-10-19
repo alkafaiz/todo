@@ -43,3 +43,5 @@ export const ORDERS = [
     { label: 'Z-A', value: SORT_ZA },
     { label: 'Belum Selesai', value: SORT_BELUM_SELESAI },
 ];
+
+export const EMAIL_ID = 'alkafaiz99@gmail.com';

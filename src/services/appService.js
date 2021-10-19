@@ -1,9 +1,9 @@
-import { END_POINTS } from '../helper/constants';
+import { EMAIL_ID, END_POINTS } from '../helper/constants';
 import httpClient from '../helper/httpClient';
 
 export async function getActivities() {
     try {
-        const data = await httpClient.get(END_POINTS.activity.href);
+        const data = await httpClient.get(`${END_POINTS.activity.href}?email=${EMAIL_ID}`);
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -21,7 +21,7 @@ export async function deleteActivity(id) {
 
 export async function createActivity(name) {
     try {
-        const payload = { title: name };
+        const payload = { title: name, email: EMAIL_ID };
         const data = await httpClient.post(END_POINTS.activity.href, payload);
         return data;
     } catch (error) {
