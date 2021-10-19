@@ -3,13 +3,15 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@craco/craco": "^6.3.0",
+        "@babel/plugin-transform-react-jsx": "^7.14.9",
         "@tailwindcss/forms": "^0.3.4",
         "@tailwindcss/line-clamp": "^0.2.2",
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
         "@testing-library/user-event": "^12.1.10",
+        "customize-cra": "^1.0.0",
         "d3-ease": "^1.0.7",
+        "preact": "^10.5.15",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-hook-form": "^7.17.4",
@@ -21,9 +23,10 @@
         "web-vitals": "^1.0.1"
     },
     "scripts": {
-        "start": "craco start",
-        "build": "craco build",
-        "test": "craco test",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
@@ -47,6 +50,8 @@
     "devDependencies": {
         "autoprefixer": "^9.8.8",
         "postcss": "^7.0.39",
+        "react-app-rewired": "^2.1.8",
+        "source-map-explorer": "^2.5.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
     }
 }
