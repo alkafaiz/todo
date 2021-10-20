@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { getTodo } from '../services/appService';
-import { parseBooleanFromBinary, sortItem } from './utilities';
+import { getSortedItems, parseBooleanFromBinary } from './utilities';
 
 const TodoContext = React.createContext();
 const RefreshTodoContext = React.createContext();
-const SortItemContext = React.createContext();
-const UpdateItemStateContext = React.createContext();
 
 export function useTodo() {
     return useContext(TodoContext);
@@ -15,36 +13,36 @@ export function useRefreshTodo() {
     return useContext(RefreshTodoContext);
 }
 
-export function useSortTodo() {
-    return useContext(SortItemContext);
-}
-
-export function useUpdateItemState() {
-    return useContext(UpdateItemStateContext);
-}
-
 const initialValue = { details: { id: '', title: '', items: [] }, isLoading: true };
 
 export function TodoProvider({ children }) {
     const [todo, setTodo] = useState(initialValue);
+    const [sortedItems, setSortedItems] = useState(null);
 
     async function loadTodo(id) {
         try {
             const todo = await getTodo(id);
+            const items = todo.todo_items.map((item) => ({
+                ...item,
+                is_active: parseBooleanFromBinary(item.is_active),
+            }));
             setTodo({
                 details: {
                     id: todo.id,
                     title: todo.title,
-                    items: todo.todo_items.map((item) => ({
-                        ...item,
-                        is_active: parseBooleanFromBinary(item.is_active),
-                    })),
+                    items,
                 },
                 isLoading: false,
             });
+            prepareSortedItems(items);
         } catch (error) {
             setTodo((prev) => ({ ...prev, isLoading: false }));
         }
+    }
+
+    function prepareSortedItems(unsortedItems) {
+        const allSortedItems = getSortedItems(unsortedItems);
+        setSortedItems(allSortedItems);
     }
 
     const replaceItems = (items) => {
@@ -52,7 +50,7 @@ export function TodoProvider({ children }) {
     };
 
     function sort(order) {
-        const items = sortItem(order, [...todo.details.items]);
+        const items = sortedItems[order];
         replaceItems(items);
     }
 
@@ -66,12 +64,10 @@ export function TodoProvider({ children }) {
 
     return (
         <TodoContext.Provider value={todo}>
-            <RefreshTodoContext.Provider value={loadTodo}>
-                <SortItemContext.Provider value={sort}>
-                    <UpdateItemStateContext.Provider value={updateItemState}>
-                        {children}
-                    </UpdateItemStateContext.Provider>
-                </SortItemContext.Provider>
+            <RefreshTodoContext.Provider
+                value={{ refreshTodo: loadTodo, updateTodoStatus: updateItemState, sort: sort }}
+            >
+                {children}
             </RefreshTodoContext.Provider>
         </TodoContext.Provider>
     );

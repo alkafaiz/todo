@@ -30,53 +30,74 @@ export function parseBinaryFromBoolean(bool) {
     return !!bool ? 1 : 0;
 }
 
-export function sortItem(order, initialItems) {
+function sortByDateAsc(initialItems) {
     let items = [...initialItems];
-    switch (order) {
-        case SORT_TERBARU:
-            items.sort(function (a, b) {
-                if (a.id > b.id) return -1;
-                if (a.id < b.id) return 1;
+    items.sort(function (a, b) {
+        if (a.id > b.id) return -1;
+        if (a.id < b.id) return 1;
 
-                return 0;
-            });
-            break;
-
-        case SORT_TERLAMA:
-            items.sort(function (a, b) {
-                if (a.id < b.id) return -1;
-                if (a.id > b.id) return 1;
-
-                return 0;
-            });
-            break;
-
-        case SORT_AZ:
-            items.sort(function (a, b) {
-                if (a.title < b.title) return -1;
-                if (a.title > b.title) return 1;
-
-                return 0;
-            });
-            break;
-
-        case SORT_ZA:
-            items.sort(function (a, b) {
-                if (a.title > b.title) return -1;
-                if (a.title < b.title) return 1;
-
-                return 0;
-            });
-            break;
-
-        case SORT_BELUM_SELESAI:
-            items.sort(function (a, b) {
-                return a.is_active === b.is_active ? 0 : a.is_active ? -1 : 1;
-            });
-            break;
-
-        default:
-            break;
-    }
+        return 0;
+    });
     return items;
+}
+
+function sortByDateDesc(initialItems) {
+    let items = [...initialItems];
+    items.sort(function (a, b) {
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+
+        return 0;
+    });
+    return items;
+}
+
+function sortByAsc(initialItems) {
+    let items = [...initialItems];
+    items.sort(function (a, b) {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+
+        return 0;
+    });
+    return items;
+}
+
+function sortByDesc(initialItems) {
+    let items = [...initialItems];
+    items.sort(function (a, b) {
+        if (a.title > b.title) return -1;
+        if (a.title < b.title) return 1;
+
+        return 0;
+    });
+    return items;
+}
+
+function sortByBelumSelesai(initialItems) {
+    let items = [...initialItems];
+    items.sort(function (a, b) {
+        return a.is_active === b.is_active ? 0 : a.is_active ? -1 : 1;
+    });
+    return items;
+}
+
+export function getSortedItems(items) {
+    if (items.length >= 2) {
+        return {
+            [SORT_TERBARU]: sortByDateAsc(items),
+            [SORT_TERLAMA]: sortByDateDesc(items),
+            [SORT_AZ]: sortByAsc(items),
+            [SORT_ZA]: sortByDesc(items),
+            [SORT_BELUM_SELESAI]: sortByBelumSelesai(items),
+        };
+    } else {
+        return {
+            [SORT_TERBARU]: items,
+            [SORT_TERLAMA]: items,
+            [SORT_AZ]: items,
+            [SORT_ZA]: items,
+            [SORT_BELUM_SELESAI]: items,
+        };
+    }
 }

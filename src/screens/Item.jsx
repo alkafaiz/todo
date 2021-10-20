@@ -8,7 +8,7 @@ import { TodoProvider, useRefreshTodo, useTodo } from '../helper/TodoContext';
 function Item() {
     const params = useParams();
     const { details, isLoading } = useTodo();
-    const refreshTodo = useRefreshTodo();
+    const { refreshTodo } = useRefreshTodo();
 
     useEffect(() => {
         initializeTodo(); // eslint-disable-next-line

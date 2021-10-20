@@ -13,7 +13,7 @@ import SortTodoItems from './SortTodoItems';
 function AddTodoItem() {
     const params = useParams();
     const { isModalOpen, handleOpenModal, handleCloseModal } = useModal();
-    const refreshTodo = useRefreshTodo();
+    const { refreshTodo } = useRefreshTodo();
 
     const onSubmit = async (data) => {
         try {

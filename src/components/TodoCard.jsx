@@ -8,7 +8,7 @@ import PencilIcon from './PencilIcon';
 import useModal from '../helper/useModal';
 import Modal from './Modal';
 import TodoItemDialog from './TodoItemDialog';
-import { useRefreshTodo, useUpdateItemState } from '../helper/TodoContext';
+import { useRefreshTodo } from '../helper/TodoContext';
 import { useParams } from 'react-router-dom';
 import DeleteDialog from './DeleteDialog';
 
@@ -24,8 +24,7 @@ function TodoCard({ id, title, priority, isActive }) {
         handleCloseModal: handleCloseDeleteModal,
         handleOpenModal: handleOpenDeleteModal,
     } = useModal();
-    const refreshTodo = useRefreshTodo();
-    const updateTodoStatus = useUpdateItemState();
+    const { refreshTodo, updateTodoStatus } = useRefreshTodo();
     const params = useParams();
     const [isDeleting, setIsDeleting] = useState(false);
 

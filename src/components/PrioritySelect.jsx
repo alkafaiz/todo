@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import useClickOutside from '../helper/useClickOutside';
-import { useTransition, animated } from 'react-spring';
-import { easeQuadIn, easeQuadOut } from 'd3-ease';
 import { PRIORITIES } from '../helper/constants';
 import { getPriorityColor } from '../helper/utilities';
 import CheckIcon from './CheckIcon';
@@ -19,16 +17,6 @@ function PrioritySelect({ value, ...props }) {
     const toggleOpen = () => setIsOpen((prev) => !prev);
     const onClose = () => setIsOpen(false);
     let menuRef = useClickOutside(onClose);
-
-    let transitions = useTransition(isOpen, null, {
-        from: { opacity: 0, transform: 'scale(0.95)' },
-        enter: { opacity: 1, transform: 'scale(1)' },
-        leave: { opacity: 0, transform: 'scale(0.95)' },
-        config: (item, state) => ({
-            easing: state === 'leave' ? easeQuadIn : easeQuadOut,
-            duration: state === 'leave' ? 75 : 100,
-        }),
-    });
 
     const onSelect = (prio) => {
         props.onChange(prio);
@@ -53,35 +41,32 @@ function PrioritySelect({ value, ...props }) {
                     <ChevronIconDown />
                 </div>
             </button>
-            {transitions.map(
-                ({ item, key, props }) =>
-                    item && (
-                        <animated.div style={props} key={key} className="absolute mt-2 w-full z-10 ">
-                            <div className="bg-white block border rounded-md border-gray-300 shadow-sm">
-                                {PRIORITIES.map((prio, index) => {
-                                    const isSelected = prio.value === value;
-                                    return (
-                                        <div
-                                            data-cy="modal-add-priority-item"
-                                            onClick={() => onSelect(prio.value)}
-                                            key={prio.label}
-                                            className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
-                                                index !== 0 ? 'border-t' : ''
-                                            }`}
-                                        >
-                                            <div className={`${prio.color} rounded-full w-3 h-3 mr-2`}></div>
-                                            <span>{prio.label}</span>
-                                            {isSelected && (
-                                                <div className="ml-auto">
-                                                    <CheckIcon />
-                                                </div>
-                                            )}
+            {isOpen && (
+                <div className="absolute mt-2 w-full z-10 ">
+                    <div className="bg-white block border rounded-md border-gray-300 shadow-sm">
+                        {PRIORITIES.map((prio, index) => {
+                            const isSelected = prio.value === value;
+                            return (
+                                <div
+                                    data-cy="modal-add-priority-item"
+                                    onClick={() => onSelect(prio.value)}
+                                    key={prio.label}
+                                    className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
+                                        index !== 0 ? 'border-t' : ''
+                                    }`}
+                                >
+                                    <div className={`${prio.color} rounded-full w-3 h-3 mr-2`}></div>
+                                    <span>{prio.label}</span>
+                                    {isSelected && (
+                                        <div className="ml-auto">
+                                            <CheckIcon />
                                         </div>
-                                    );
-                                })}
-                            </div>
-                        </animated.div>
-                    )
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
             )}
         </div>
     );
