@@ -8,7 +8,6 @@ import toast from 'react-hot-toast';
 import TodoItemDialog from './TodoItemDialog';
 import { useParams } from 'react-router-dom';
 import { useRefreshTodo } from '../helper/TodoContext';
-import SortTodoItems from './SortTodoItems';
 
 function AddTodoItem() {
     const params = useParams();
@@ -18,9 +17,9 @@ function AddTodoItem() {
     const onSubmit = async (data) => {
         try {
             await createTodoItem(params?.id, data.name, data.priority);
-            refreshTodo(params?.id);
             handleCloseModal();
-            toast.success('Todo berhasil ditambahkan');
+            refreshTodo(params?.id);
+            // toast.success('Todo berhasil ditambahkan');
         } catch (error) {
             console.log(error);
             toast.error('Todo gagal ditambahkan');
@@ -29,7 +28,6 @@ function AddTodoItem() {
 
     return (
         <div className="flex items-center">
-            <SortTodoItems />
             <Button data-cy="todo-add-button" onClick={handleOpenModal} startIcon={<AddIcon />}>
                 Tambah
             </Button>

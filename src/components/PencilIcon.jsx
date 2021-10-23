@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function PencilIcon({ size = '24px' }) {
     return (
@@ -11,4 +11,4 @@ function PencilIcon({ size = '24px' }) {
     );
 }
 
-export default PencilIcon;
+export default memo(PencilIcon);

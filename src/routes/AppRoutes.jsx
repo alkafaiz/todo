@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import routes from './routes';
 
 const AppRoutes = () => {
@@ -11,9 +11,6 @@ const AppRoutes = () => {
                     path={props.path}
                     key={name}
                     render={() => {
-                        if (redirectTo) {
-                            return <Redirect to={redirectTo} />;
-                        }
                         return Component && <Component />;
                     }}
                 />

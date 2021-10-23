@@ -1,32 +1,11 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { parseISODateString } from '../helper/utilities';
 import IconButton from './IconButton';
 import TrashIcon from './TrashIcon';
-import Modal from './Modal';
-import DeleteDialog from './DeleteDialog';
-import { deleteActivity } from '../services/appService';
-import useModal from '../helper/useModal';
-import { useRefreshActivity } from '../helper/ActivityContext';
-import toast from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
 
-function ActivityCard({ id, title, dateCreated }) {
-    const { isModalOpen, handleCloseModal, handleOpenModal } = useModal();
-    const [isDeleting, setIsDeleting] = useState(false);
-    const refreshActivity = useRefreshActivity();
+function ActivityCard({ id, title, dateCreated, onDelete }) {
     const history = useHistory();
-
-    const handleDelete = async () => {
-        try {
-            setIsDeleting(true);
-            await deleteActivity(id);
-            refreshActivity();
-            toast.success('Activity berhasil dihapus');
-        } catch (error) {
-            toast.error('Activity gagal dihapus');
-            console.log(error);
-        }
-    };
 
     const handleNavigate = () => {
         history.push(`/item/${id}`);
@@ -46,20 +25,12 @@ function ActivityCard({ id, title, dateCreated }) {
                     </span>
                     <IconButton
                         data-cy="activity-item-delete-button"
-                        onClick={handleOpenModal}
+                        onClick={onDelete}
                         icon={<TrashIcon />}
                         size="small"
                     />
                 </div>
             </div>
-            <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-                <DeleteDialog
-                    onCancel={handleCloseModal}
-                    onConfirm={handleDelete}
-                    isLoading={isDeleting}
-                    title={title}
-                />
-            </Modal>
         </>
     );
 }

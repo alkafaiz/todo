@@ -23,6 +23,7 @@
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
+        "automate-submission": "./scripts/deploy.sh mytodoapp.com E38O64SLEZD51W && node ./scripts/autosubmit/index.js",
         "test": "react-app-rewired test",
         "eject": "react-scripts eject"
     },

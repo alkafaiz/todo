@@ -62,10 +62,15 @@ export function TodoProvider({ children }) {
         replaceItems(newTodo);
     }
 
+    const deleteTodo = (id) => {
+        const newItems = todo.details.items.filter((item) => item.id !== id);
+        replaceItems(newItems);
+    };
+
     return (
         <TodoContext.Provider value={todo}>
             <RefreshTodoContext.Provider
-                value={{ refreshTodo: loadTodo, updateTodoStatus: updateItemState, sort: sort }}
+                value={{ refreshTodo: loadTodo, updateTodoStatus: updateItemState, sort: sort, deleteTodo }}
             >
                 {children}
             </RefreshTodoContext.Provider>

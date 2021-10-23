@@ -1,13 +1,21 @@
-// import { lazy, Suspense } from 'react';
-import Dashboard from '../screens/Dashboard';
-import Item from '../screens/Item';
-// const ItemPage = lazy(() => import('../screens/Item'));
+import { lazy, Suspense } from 'react';
+// import Dashboard from '../screens/Dashboard';
+// import Item from '../screens/Item';
+const DashboardPage = lazy(() => import('../screens/Dashboard'));
 
-// const Item = () => (
-//     <Suspense fallback={<div>Preparing page...</div>}>
-//         <ItemPage />
-//     </Suspense>
-// );
+const Dashboard = () => (
+    <Suspense fallback={<div>Preparing page...</div>}>
+        <DashboardPage />
+    </Suspense>
+);
+
+const ItemPage = lazy(() => import('../screens/Item'));
+
+const Item = () => (
+    <Suspense fallback={<div>Preparing page...</div>}>
+        <ItemPage />
+    </Suspense>
+);
 
 const routes = [
     {

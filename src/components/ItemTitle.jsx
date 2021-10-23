@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ChevronLeftIcon from './ChevronLeftIcon';
 import IconButton from './IconButton';
@@ -42,7 +42,7 @@ function ItemTitle({ title }) {
             setItemName(value);
             setIsEditing(false);
             await updateActivity(params?.id, { title: value });
-            toast.success('Activity berhasil di update');
+            // toast.success('Activity berhasil di update');
         } catch (error) {
             console.log(error);
             setItemName(oldValue);
@@ -82,4 +82,4 @@ function ItemTitle({ title }) {
     );
 }
 
-export default ItemTitle;
+export default memo(ItemTitle);

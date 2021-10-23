@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import useClickOutside from '../helper/useClickOutside';
 import { PRIORITIES } from '../helper/constants';
 import { getPriorityColor } from '../helper/utilities';
@@ -41,37 +41,37 @@ function PrioritySelect({ value, ...props }) {
                     <ChevronIconDown />
                 </div>
             </button>
-            {isOpen && (
-                <div className="absolute mt-2 w-full z-10 ">
-                    <div className="bg-white block border rounded-md border-gray-300 shadow-sm">
-                        {PRIORITIES.map((prio, index) => {
-                            const isSelected = prio.value === value;
-                            return (
-                                <div
-                                    data-cy="modal-add-priority-item"
-                                    onClick={() => onSelect(prio.value)}
-                                    key={prio.label}
-                                    className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
-                                        index !== 0 ? 'border-t' : ''
-                                    }`}
-                                >
-                                    <div className={`${prio.color} rounded-full w-3 h-3 mr-2`}></div>
-                                    <span>{prio.label}</span>
-                                    {isSelected && (
-                                        <div className="ml-auto">
-                                            <CheckIcon />
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
+            {/* {isOpen && ( */}
+            <div className={`${isOpen ? '' : 'hidden'} absolute mt-2 w-full z-10`}>
+                <div className="bg-white block border rounded-md border-gray-300 shadow-sm">
+                    {PRIORITIES.map((prio, index) => {
+                        const isSelected = prio.value === value;
+                        return (
+                            <div
+                                data-cy="modal-add-priority-item"
+                                onClick={() => onSelect(prio.value)}
+                                key={prio.label}
+                                className={`flex items-center px-3 py-2 hover:bg-gray-100 ${
+                                    index !== 0 ? 'border-t' : ''
+                                }`}
+                            >
+                                <div className={`${prio.color} rounded-full w-3 h-3 mr-2`}></div>
+                                <span>{prio.label}</span>
+                                {isSelected && (
+                                    <div className="ml-auto">
+                                        <CheckIcon />
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
-            )}
+            </div>
+            {/* )} */}
         </div>
     );
 }
 
 const WrappedPrioritySelect = React.forwardRef((props, ref) => <PrioritySelect {...props} inputRef={ref} />);
 
-export default WrappedPrioritySelect;
+export default memo(WrappedPrioritySelect);
